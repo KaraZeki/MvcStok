@@ -1,0 +1,74 @@
+﻿@model MvcStok.Models.Entity.TBLSATISLAR
+@using MvcStok.Models.Entity
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ürün Adı</th>
+        <th>Üürünü Alan Müşteri</th>
+        <th>Adet</th>
+        <th>Fiyat</th>
+
+    </tr>
+
+    <tbody>
+        @foreach (var sts in Model.tBLSATISLARs)
+        {
+            <tr>
+                <td>@sts.URUN</td>
+                <td>@sts.MUSTERI</td>
+                <td>@sts.ADET</td>
+                <td>@sts.FIYAT</td>
+
+                <td><a href="/URUN/SIL/@sts.SATISID" class="btn btn-danger">SİL</a></td>
+                <td><a href="/URUN/UrunGetir/@sts.SATISID" class="btn btn-success">GUNCELLE</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">Satış Yap</button>
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Satış Yapma Ekranı</h2>
+
+            </div>
+            <form method="post" action="/Satis/SatisYap">
+                <div class="modal-body">
+                    <label>
+                        Ürün Adı
+                    </label>
+                    @Html.TextBoxFor((m => m.URUN), new { @class = "form-control" })
+                    <br />
+                    <label>
+                        Müşteri
+                    </label>
+                    @Html.TextBoxFor((m => m.MUSTERI), new { @class = "form-control" })
+
+                    <br />
+                    <label>
+                        Adet
+                    </label>
+                    @Html.TextBoxFor((m => m.ADET), new { @class = "form-control" })
+                    <label>
+                        Fiyat
+                    </label>
+                    @Html.TextBoxFor((m => m.FIYAT), new { @class = "form-control" })
+                    <br /><br />
+
+
+                    <button type="submit" class="btn btn-warning">Verileri Kaydet</button>
+                    <button type="button" class="btn btn-warning" data-dismiss="modal">Vazgeç</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+

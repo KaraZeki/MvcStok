@@ -1,0 +1,62 @@
+﻿@using MvcStok.Models.Entity
+@model List<TBLMUSTERI>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@*@using (Html.BeginForm("Index", "Musteri", FormMethod.Get))
+{
+    <p>
+        Aranacak Müşteri Adı: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}*@
+<table id="tblMusteri" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Müşteri ID</th>
+            <th>Müşteri ADI</th>
+            <th>Müşteri Soyadı</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+
+
+        </tr>
+    </thead>
+
+
+    <tbody>
+        @foreach (var mst in Model)
+        {
+            <tr>
+                <td>@mst.MUSTERIID</td>
+                <td>@mst.MUSTERIAD</td>
+                <td>@mst.MUSTERISOYAD</td>
+                <td>@Html.ActionLink("SİL", "SIL", new { id = mst.MUSTERIID }, new { @class = "btn btn-danger", onclick = "return confirm('Silmek istediğinizden emin misiniz?')" })</td>
+                <td><a href="/MUSTERI/MusteriGetir/@mst.MUSTERIID" class="btn btn-success">GUNCELLE</a></td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Musteri/MusteriEkle" class="btn btn-primary">YENİ MÜŞTERİ EKLE  </a>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css
+" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css
+" rel="stylesheet" />
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js"></script>
+
+<link href="~/Content/DataTables/css/dataTables.bootstrap4.css" rel="stylesheet" />
+
+
+<script>
+    $('#tblMusteri').dataTable({
+        language: { url: "//cdn.datatables.net/plug-ins/1.10.21/i18n/Turkish.json" }});
+</script> 
